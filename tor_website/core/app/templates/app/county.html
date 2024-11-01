@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %}
+
+{% block title %}County: {{ county.name }}{% endblock %}
+
+{% block content %}
+<h2>Posts in {{ county.name }}, {{ county.state.name }}</h2>
+<p>Browse recent posts and share your own.</p>
+
+<div class="post-list">
+    <h3>Posts</h3>
+    <ul>
+        {% for post in county.posts.all %}
+            <li>
+                <a href="{% url 'post-detail' post.id %}">{{ post.content|truncatewords:10 }}</a>
+                <span>Posted on {{ post.timestamp|date:"Y-m-d H:i" }}</span>
+            </li>
+        {% empty %}
+            <li>No posts available in this county.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<a href="{% url 'new-post' %}" class="btn">Add New Post</a>
+{% endblock %}

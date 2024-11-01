@@ -1,0 +1,21 @@
+{% extends 'app/base.html' %}
+
+{% block title %}State: {{ state.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ state.name }}</h2>
+<p>Browse posts by county in {{ state.name }}.</p>
+
+<div class="county-list">
+    <h3>Counties in {{ state.name }}</h3>
+    <ul>
+        {% for county in state.counties.all %}
+            <li>
+                <a href="{% url 'county-board' county.id %}">{{ county.name }}</a>
+            </li>
+        {% empty %}
+            <li>No counties available.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
