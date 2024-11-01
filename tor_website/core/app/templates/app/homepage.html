@@ -1,0 +1,38 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anonymous Image Board</title>
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Interactive Map!</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'state_list' %}">States</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Explore discussions across the USA by navigating through states and counties.</h2>
+        <div id="map-container">
+            <!-- Placeholder for SVG map -->
+            <svg id="usa-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
+                {% for state in states %}
+                <a href="{% url 'state' state_id=state.abbreviation %}" class="state-link">
+                    <path id="{{ state.abbreviation }}" d="{{ state.svg_path }}" class="state" />
+                </a>
+                {% endfor %}
+            </svg>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Anonymous Image Board</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Recent Posts{% endblock %}
+
+{% block content %}
+<h2>Recent Posts</h2>
+<div class="post-list">
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url 'post-detail' post.id %}">{{ post.content|truncatewords:10 }}</a>
+                <span class="post-timestamp">{{ post.timestamp|date:"Y-m-d H:i" }}</span>
+            </li>
+        {% empty %}
+            <li>No recent posts available.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Post Details{% endblock %}
+
+{% block content %}
+<h2>Post Details</h2>
+
+<div class="post-detail">
+    <p>{{ post.content }}</p>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Post image">
+    {% endif %}
+    <span>Posted in {{ post.county.name }}, {{ post.county.state.name }} on {{ post.timestamp|date:"Y-m-d H:i" }}</span>
+</div>
+
+<a href="{% url 'county-board' post.county.id %}" class="btn">Back to County</a>
+{% endblock %}
