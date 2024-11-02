@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Local Legends{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <!-- Welcome Section -->
+    <div class="welcome-section p-5 text-light rounded shadow-lg hero-background">
+        <h1 class="display-4 font-weight-bold">Welcome to Local Legends!</h1>
+        <p class="lead">Your gateway to exploring and sharing local stories and legends.</p>
+        <div class="mt-4">
+            <a href="{{ url_for('auth.login') }}" class="btn btn-warning btn-lg mx-2">Login</a>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-dark btn-lg mx-2">Register</a>
+        </div>
+    </div>
+
+    <div class="divider my-4"></div>
+
+    <!-- Why Join Us Section -->
+    <div class="why-join mt-5">
+        <h2 class="text-primary font-weight-bold">Why Join Us?</h2>
+        <p class="lead">By becoming a member, you can:</p>
+        <ul class="list-unstyled lead">
+            <li><i class="fas fa-star"></i> ✨ Share your local legends and stories.</li>
+            <li><i class="fas fa-globe"></i> 🌎 Explore contributions from other members.</li>
+            <li><i class="fas fa-book-open"></i> 📜 Help preserve the culture and history of your community.</li>
+        </ul>
+    </div>
+
+    <div class="divider my-4"></div>
+
+    <!-- Featured Legends Section -->
+    <h2 class="text-light">Featured Legends</h2>
+    <div class="row mt-5">
+        {% for legend in legends %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 legend-card">
+                    <img src="{{ url_for('static', filename='images/' + legend.image) }}" class="card-img-top" alt="Legend Image {{ legend.id }}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{{ legend.title }}</h5>
+                        <p class="card-text">{{ legend.description | truncate(100) }}</p>
+                        <a href="{{ url_for('legend_detail', id=legend.id) }}" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .hero-background {
+        background: linear-gradient(135deg, hsl(43, 100%, 51%), hsl(210, 29%, 24%));
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+    }
+
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .divider {
+        height: 2px;
+        background-color: var(--highlight-color);
+        margin: 2rem 0;
+    }
+
+    .btn {
+        transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+    }
+
+    .legend-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .legend-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .welcome-section {
+            padding: 3rem; /* Responsive padding for smaller screens */
+        }
+
+        .display-4 {
+            font-size: 2.5rem; /* Responsive heading size */
+        }
+
+        .lead {
+            font-size: 1rem; /* Responsive subtitle size */
+        }
+
+        .why-join h2 {
+            font-size: 1.8rem; /* Responsive Why Join Us heading size */
+        }
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore local legends and share stories across the USA.">
+    <meta name="author" content="LocalLegends">
+    <title>{% block title %}Local Legends{% endblock %}</title>
+
+    <!-- Load CSS and Fonts -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-DyZvZngRj6is57L9ZV7UPL9I4mQH8Yd4cIu8f/0OtuFhS1M7nBHR/0ED4IKC+0B7" crossorigin="anonymous">
+
+    <!-- Optional: Add a favicon if you have one -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Main Content Wrapper -->
+    <div class="container content-wrapper my-5">
+        <main class="content" role="main" aria-labelledby="main-heading">
+            {% block content %}
+            <!-- Placeholder for main content -->
+            {% endblock %}
+        </main>
+    </div>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script>
+        // Change navbar background on scroll
+        $(window).on("scroll", function() {
+            if ($(window).scrollTop() > 50) {
+                $(".navbar").addClass("bg-dark");
+            } else {
+                $(".navbar").removeClass("bg-dark");
+            }
+        });
+    </script>
+</body>
+</html>

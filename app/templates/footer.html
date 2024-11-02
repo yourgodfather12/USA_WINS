@@ -1,0 +1,22 @@
+<footer class="footer bg-dark text-light py-4">
+    <div class="container text-center">
+        <h5 class="font-weight-bold text-uppercase">Local Legends</h5>
+        <p class="small">Discover, connect, and share local stories and legends. Join us in building a community of shared heritage.</p>
+
+        <div class="footer-links my-3">
+            <a href="{{ url_for('main.home') }}" class="mx-2">Home</a> |
+            <a href="{{ url_for('main.about') }}" class="mx-2">About</a> |
+            <a href="{{ url_for('main.states') }}" class="mx-2">Interactive Map</a> |
+            <a href="{{ url_for('main.faq') }}" class="mx-2">FAQ</a> |
+            <a href="{{ url_for('main.contact') }}" class="mx-2">Contact</a>
+        </div>
+
+        <div class="social-icons mt-3">
+            <a href="#" class="mx-2"><i class="fab fa-facebook fa-lg text-light"></i></a>
+            <a href="#" class="mx-2"><i class="fab fa-twitter fa-lg text-light"></i></a>
+            <a href="#" class="mx-2"><i class="fab fa-instagram fa-lg text-light"></i></a>
+        </div>
+
+        <p class="small mt-3">© {{ current_year }} Local Legends. All rights reserved.</p>
+    </div>
+</footer>

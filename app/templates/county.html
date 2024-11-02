@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}County - {{ county_id }}{% endblock %}
+
+{% block content %}
+<div class="county-container my-5">
+    <h2 class="text-center font-weight-bold">County - {{ county_id }}</h2>
+
+    <!-- Upload Form -->
+    <div class="upload-form my-4">
+        <form action="{{ url_for('upload_image') }}" method="post" enctype="multipart/form-data" class="text-center">
+            <div class="form-group">
+                <input type="file" name="file" class="form-control-file" required>
+            </div>
+            <input type="hidden" name="location" value="{{ county_id }}">
+            <button type="submit" class="btn btn-primary mt-3 font-weight-bold">Upload Image</button>
+        </form>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="gallery row mt-5">
+        {% if images %}
+            {% for image in images %}
+                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                    <div class="gallery-item">
+                        <img src="{{ url_for('static', filename='uploads/' + image.filename) }}" alt="Image for {{ county_id }}" class="img-fluid rounded shadow-sm">
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center w-100">No images available for this county yet. Be the first to upload!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

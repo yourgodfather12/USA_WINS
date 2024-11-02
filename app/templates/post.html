@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Post Detail{% endblock %}
+
+{% block content %}
+<div class="post-detail my-5">
+    <h1 class="font-weight-bold">{{ post.title }}</h1>
+    <p class="text-muted">Posted by: <strong>{{ post.author.username }}</strong> on {{ post.date_posted }}</p>
+    <div class="post-content my-4">
+        <p>{{ post.content }}</p>
+    </div>
+
+    <h2 class="font-weight-bold">Comments</h2>
+    <div id="comments" class="mb-4">
+        {% for comment in post.comments %}
+            <div class="comment mb-2 p-3 border rounded">
+                <p><strong>{{ comment.author.username }}</strong>: {{ comment.content }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form action="{{ url_for('main.add_comment', post_id=post.id) }}" method="POST" class="mb-4">
+        <label for="comment" class="font-weight-bold">Add a Comment:</label>
+        <textarea name="comment" required class="form-control" rows="4" placeholder="Write your comment here..."></textarea>
+        <input type="submit" value="Submit" class="btn btn-primary mt-2">
+    </form>
+</div>
+
+<style>
+    .post-detail {
+        max-width: 800px; /* Limit the width of the post */
+        margin: 0 auto; /* Center the post detail */
+        padding: 20px; /* Add padding for better spacing */
+        background-color: #f9f9f9; /* Light background for contrast */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    }
+
+    .post-content {
+        font-size: 1.1rem; /* Consistent font size for content */
+        line-height: 1.5; /* Improved line height for readability */
+    }
+
+    .comment {
+        background-color: #fff; /* White background for comments */
+        border: 1px solid #ddd; /* Border for comments */
+        border-radius: 5px; /* Rounded corners */
+        transition: box-shadow 0.3s; /* Smooth transition for hover */
+    }
+
+    .comment:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+    }
+
+    .form-control {
+        border-radius: 5px; /* Rounded corners for textarea */
+    }
+
+    input[type="submit"] {
+        border-radius: 5px; /* Rounded corners for submit button */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .post-detail {
+            padding: 15px; /* Responsive padding */
+        }
+    }
+</style>
+{% endblock %}

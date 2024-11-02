@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container my-5">
+    <div class="card shadow-lg p-4 mx-auto" style="max-width: 400px; border-radius: 12px;">
+        <h2 class="text-center font-weight-bold mb-4">Login</h2>
+
+        <!-- Login Form -->
+        <form method="POST" action="{{ url_for('auth.login') }}">
+            <div class="form-group">
+                <label for="email" class="font-weight-bold">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="font-weight-bold">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" id="remember" name="remember" class="form-check-input">
+                <label for="remember" class="form-check-label">Remember Me</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block font-weight-bold mt-3">Login</button>
+        </form>
+
+        <!-- Flash Messages for Login Feedback -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="flash-messages mt-4">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} mt-2" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Register Link -->
+        <p class="text-center mt-4">Don't have an account? <a href="{{ url_for('auth.register') }}" class="font-weight-bold">Register here</a>.</p>
+    </div>
+</div>
+
+<style>
+    .login-container {
+        padding: 20px; /* Added padding for spacing */
+        background-color: #f9f9f9; /* Light background for contrast */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    }
+
+    .card {
+        transition: transform 0.3s; /* Transition for card hover effect */
+    }
+
+    .card:hover {
+        transform: translateY(-5px); /* Slight lift effect on hover */
+    }
+
+    .flash-messages {
+        margin: 10px 0; /* Spacing for flash messages */
+    }
+
+    .alert {
+        border-radius: 5px; /* Rounded corners for alerts */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .login-container {
+            padding: 15px; /* Responsive padding */
+        }
+
+        .card {
+            width: 90%; /* Make card responsive */
+        }
+    }
+</style>
+{% endblock %}

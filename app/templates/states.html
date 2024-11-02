@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}Interactive Map of States{% endblock %}
+
+{% block content %}
+<div class="map-container my-5">
+    <h1 class="text-center font-weight-bold mb-4">Interactive Map of States</h1>
+    <p class="text-center mb-4">Click on a state to view its details.</p>
+
+    <!-- Map container -->
+    <div id="map" style="height: 600px; border-radius: 8px; overflow: hidden;"></div>
+    <div id="map-error" class="alert alert-danger" role="alert" style="display: none;">
+        Error loading map. Please try again later.
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<!-- Include Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<style>
+    .state-tooltip {
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 3px;
+        font-size: 14px; /* Consistent font size for tooltips */
+    }
+
+    /* Ensure the map is responsive */
+    #map {
+        width: 100%; /* Full width */
+        max-width: 100%; /* Prevent overflow */
+        border-radius: 8px; /* Rounded corners for aesthetics */
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<!-- Include Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialize the map centered on the USA
+        const map = L.map("map").setView([37.8, -96], 4);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        // GeoJSON data for the USA
+        fetch("{{ url_for('static', filename='data/us-states.geojson') }}")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok " + response.statusText);
+                }
+                return response.json();
+            })
+            .then(geojsonData => {
+                // Define state styles and interactive behavior
+                const stateStyle = {
+                    color: "#444",
+                    weight: 2,
+                    fillColor: "#88A4BC",
+                    fillOpacity: 0.6,
+                };
+
+                // Add state layer with hover and click interaction
+                const statesLayer = L.geoJson(geojsonData, {
+                    style: stateStyle,
+                    onEachFeature: function(feature, layer) {
+                        // Tooltip with state name
+                        layer.bindTooltip(feature.properties.name, {
+                            direction: "center",
+                            className: "state-tooltip",
+                            permanent: false,
+                        });
+
+                        // Hover effects
+                        layer.on("mouseover", function(e) {
+                            layer.setStyle({
+                                fillColor: "#3B729F",
+                            });
+                        });
+
+                        layer.on("mouseout", function(e) {
+                            layer.setStyle(stateStyle);
+                        });
+
+                        // Click to navigate to the state's page
+                        layer.on("click", function(e) {
+                            const stateName = feature.properties.name.toLowerCase().replace(/\s+/g, "-");
+                            window.location.href = `/state/${stateName}`; // Update with your actual URL structure
+                        });
+                    },
+                }).addTo(map);
+            })
+            .catch(error => {
+                console.error("Error loading GeoJSON data:", error);
+                document.getElementById("map-error").style.display = "block";
+            });
+
+        // Optional: Add a zoom control to the bottom-right corner
+        L.control.zoom({
+            position: "bottomright",
+        }).addTo(map);
+    });
+</script>
+{% endblock %}

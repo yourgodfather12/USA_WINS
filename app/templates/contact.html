@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<div class="contact-container my-5">
+    <h2 class="text-center font-weight-bold mb-4">Contact Us</h2>
+    <p class="text-center mb-4">If you have any questions, feedback, or need support, please reach out to us. We’d love to hear from you!</p>
+
+    <!-- Confirmation message placeholder -->
+    <div id="confirmation-message" class="alert alert-success d-none" role="alert">
+        Thank you! Your message has been sent. We'll get back to you shortly.
+    </div>
+
+    <form method="POST" action="#" class="contact-form mx-auto" style="max-width: 600px;">
+        <div class="form-group">
+            <label for="name" class="font-weight-bold">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="font-weight-bold">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="message" class="font-weight-bold">Message:</label>
+            <textarea id="message" name="message" class="form-control" rows="5" placeholder="Type your message here..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block font-weight-bold mt-3">Send Message</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Image{% endblock %}
+
+{% block content %}
+<div class="upload-container my-5">
+    <h1 class="text-center font-weight-bold mb-4">Upload Image</h1>
+    <form action="{{ url_for('main.upload_image') }}" method="POST" enctype="multipart/form-data" class="text-center mt-4">
+        <div class="form-group">
+            <label for="location" class="font-weight-bold">Location:</label>
+            <input type="text" name="location" class="form-control" placeholder="Enter the location" required>
+        </div>
+        <div class="form-group">
+            <label for="files" class="font-weight-bold">Choose images:</label>
+            <input type="file" name="files" multiple class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Upload</button>
+    </form>
+</div>
+
+<style>
+    .upload-container {
+        max-width: 500px; /* Max width for the form */
+        margin: 0 auto; /* Center the container */
+        padding: 20px; /* Padding for better spacing */
+        background-color: #f9f9f9; /* Light background for contrast */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    }
+
+    .form-group {
+        margin-bottom: 20px; /* Consistent spacing between form elements */
+    }
+
+    .form-control {
+        border-radius: 5px; /* Rounded corners for inputs */
+    }
+
+    .btn {
+        border-radius: 5px; /* Rounded corners for buttons */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .upload-container {
+            padding: 15px; /* Responsive padding */
+            width: 90%; /* Responsive width */
+        }
+    }
+</style>
+{% endblock %}

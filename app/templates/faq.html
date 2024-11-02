@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block content %}
+<div class="faq-container my-5">
+    <h1 class="text-center font-weight-bold mb-4">Frequently Asked Questions</h1>
+    <p class="text-center mb-4">Find answers to some of the most commonly asked questions about Local Legends.</p>
+
+    <!-- FAQ Accordion -->
+    <div id="faqAccordion" class="accordion">
+        <div class="card mb-3">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link text-left w-100 font-weight-bold" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        What is Local Legends?
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                <div class="card-body">
+                    Local Legends is a platform where you can discover, connect, and share stories and images of the most captivating personalities from each county across the USA.
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed text-left w-100 font-weight-bold" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        How can I upload an image?
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                <div class="card-body">
+                    To upload an image, go to the specific county page and use the "Upload Image" form to share images with the community.
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed text-left w-100 font-weight-bold" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        How is my privacy protected?
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                <div class="card-body">
+                    Local Legends values your privacy and anonymity. All content is hosted on the Tor network to ensure your identity remains protected.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Home Link -->
+    <div class="text-center mt-4">
+        <a href="{{ url_for('main.home') }}" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

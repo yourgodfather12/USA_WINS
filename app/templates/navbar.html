@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg fixed-top transition-bg">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="{{ url_for('main.home') }}">
+            <img src="{{ url_for('static', filename='images/locallegends_icon.ico') }}" alt="LocalLegends Icon" class="d-inline-block align-top" width="40" height="40"> <!-- Increased icon size -->
+            Local Legends
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'main.home' %}active{% endif %}" href="{{ url_for('main.home') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'main.about' %}active{% endif %}" href="{{ url_for('main.about') }}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'main.states' %}active{% endif %}" href="{{ url_for('main.states') }}">Interactive Map</a>
+                </li>
+                {% if discord_route_defined %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'main.discord' %}active{% endif %}" href="{{ url_for('main.discord') }}">Discord</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'main.faq' %}active{% endif %}" href="{{ url_for('main.faq') }}">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}" href="{{ url_for('main.contact') }}">Contact</a>
+                </li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'auth.login' %}active{% endif %}" href="{{ url_for('auth.login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'auth.register' %}active{% endif %}" href="{{ url_for('auth.register') }}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+    .navbar-nav .nav-link {
+        font-size: 1rem; /* Consistent font size */
+        transition: color 0.3s ease; /* Smooth color transition */
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #ffcc00; /* Highlight color on hover */
+    }
+
+    .navbar-brand img {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for the icon */
+    }
+
+    .navbar {
+        padding: 0.5rem 1rem; /* Consistent padding for the navbar */
+    }
+</style>
