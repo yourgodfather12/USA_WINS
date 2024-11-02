@@ -268,3 +268,35 @@ footer {
     max-width: 100%;
     color: var(--text-color);
 }
+
+<style>
+    .statistics-section h2 {
+        color: #f8f9fa;
+        margin-bottom: 20px;
+    }
+
+    .counter-box {
+        background: #1c1c1c;
+        color: #f8f9fa;
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .counter-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .counter-box i {
+        margin-bottom: 15px;
+    }
+
+    .counter-box h3 {
+        font-size: 2.5rem;
+        margin-bottom: 0;
+    }
+
+    .counter-box p {
+        font-size: 1.1rem;
+    }
+</style>

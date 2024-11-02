@@ -84,3 +84,7 @@ def faq():
 @login_required
 def states():
     return render_template('states.html')
+
+@bp.route('/privacy_policy')
+def privacy_policy():
+    return render_template('privacy_policy.html')
